@@ -1,4 +1,3 @@
-// import './application.css'
 import '../../assets/stylesheets/application.css'
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
@@ -14,3 +13,4 @@ createInertiaApp({
       .mount(el)
   },
 })
+
