@@ -11,7 +11,6 @@ createInertiaApp({
 
     const page = pages[`../Pages/${name}.vue`]
 
-    // Apply global layout
     page.default.layout ||= AppLayout
 
     return page

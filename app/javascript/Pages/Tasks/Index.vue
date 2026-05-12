@@ -1,5 +1,6 @@
 <script setup>
-import {  Download } from 'lucide-vue-next'
+import {  Download, X } from 'lucide-vue-next'
+import { router } from '@inertiajs/vue3'
 
 defineProps({
   tasks: Array
@@ -29,6 +30,12 @@ const downloadTasks = (tasks)=>{
   // Cleanup
   document.body.removeChild(link)
   URL.revokeObjectURL(url)
+}
+
+const deleteTask = (taskId) => {
+  if (confirm('Are you sure you want to delete this task?')) {
+    router.delete(`/tasks/${taskId}`)
+  }
 }
 </script>
 
@@ -107,8 +114,22 @@ const downloadTasks = (tasks)=>{
           >
             Pending
           </span>
+           <!-- Delete Button -->
+      <button
+        @click="deleteTask(task.id)"
+        class="
+          p-2 rounded-full
+          bg-red-100 hover:bg-red-200
+          dark:bg-red-900 dark:hover:bg-red-800
+          transition
+        "
+      >
+        <X class="w-4 h-4 text-red-600 dark:text-red-300" />
+      </button>
         </li>
       </ul>
+     
+
 
     </div>
   </div>

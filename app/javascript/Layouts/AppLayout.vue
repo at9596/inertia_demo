@@ -1,5 +1,6 @@
 <script setup>
 import ThemeToggle from '@/Components/ThemeToggle.vue'
+import { Link } from '@inertiajs/vue3'
 import { ClipboardList } from 'lucide-vue-next'
 </script>
 
@@ -23,13 +24,18 @@ import { ClipboardList } from 'lucide-vue-next'
 
         <!-- Logo -->
         <div class="flex items-center gap-3">
-          <div class="bg-blue-100 p-2 rounded-xl">
-            <ClipboardList class="w-6 h-6 text-blue-600" />
-          </div>
+           <Link
+    href="/tasks/new"
+    class="flex items-center gap-3"
+  >
+    <div class="bg-blue-100 p-2 rounded-xl">
+      <ClipboardList class="w-6 h-6 text-blue-600" />
+    </div>
 
-          <h1 class="text-xl font-bold text-gray-800 dark:text-white">
-            Task Manager
-          </h1>
+    <h1 class="text-xl font-bold text-gray-800 dark:text-white">
+      Task Manager
+    </h1>
+  </Link>
         </div>
 
         <!-- Theme Toggle -->
