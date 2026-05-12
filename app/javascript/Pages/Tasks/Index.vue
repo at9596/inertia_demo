@@ -1,23 +1,80 @@
 <script setup>
+import { ClipboardList, Download } from 'lucide-vue-next'
+
 defineProps({
   tasks: Array
 })
 
-console.log("Vue is working! Tasks received:", 50)
+const downloadTasks = (tasks)=>{
+  // convert tasks to json
+  const jsonData = JSON.stringify(tasks, null,2)
+
+  // create file
+  const blob = new Blob([jsonData], {
+   type: 'application/json'
+  })
+
+  // Generate Temprary Url
+  const url = URL.createObjectURL(blob)
+
+  // Create download link
+  const link = document.createElement('a')
+  link.href = url
+  link.download = 'tasks.json'
+
+  // Trigger download
+  document.body.appendChild(link)
+  link.click()
+  
+  // Cleanup
+  document.body.removeChild(link)
+  URL.revokeObjectURL(url)
+}
 </script>
 
 <template>
   <div class="min-h-screen bg-gray-100 py-10 px-4">
     <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8">
-      
-      <div class="flex items-center justify-between mb-6">
-        <h1 class="text-3xl font-bold text-gray-800">
-          My Tasks
-        </h1>
 
-        <span class="bg-blue-100 text-blue-700 text-sm font-medium px-3 py-1 rounded-full">
-          {{ tasks.length }} Tasks
-        </span>
+      <!-- Header -->
+      <div class="flex items-start justify-between mb-8">
+
+        <!-- Left -->
+        <div class="flex items-center gap-4">
+          <!-- Icon -->
+          <div class="bg-blue-100 p-4 rounded-2xl">
+            <ClipboardList class="w-10 h-10 text-blue-600" />
+          </div>
+
+          <!-- Title -->
+          <div>
+            <p class="text-sm text-gray-500 font-medium">
+              Add form
+            </p>
+
+            <h1 class="text-4xl font-bold text-gray-800">
+              My Tasks
+            </h1>
+          </div>
+        </div>
+
+        <!-- Right Actions -->
+        <div class="flex items-center gap-3">
+
+          <!-- Download Button -->
+          <button
+            @click= downloadTasks(tasks)
+            class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-full transition"
+          >
+            <Download class="w-4 h-4" />
+            Download
+          </button>
+
+          <!-- Task Count -->
+          <span class="bg-blue-100 text-blue-700 text-sm font-medium px-4 py-2 rounded-full">
+            {{ tasks.length }} Tasks
+          </span>
+        </div>
       </div>
 
       <div v-if="tasks.length === 0" class="text-center py-10 text-gray-500">
@@ -46,14 +103,14 @@ console.log("Vue is working! Tasks received:", 50)
 
           <span
             v-if="task.completed"
-            class="text-green-600 font-semibold text-sm"
+            class="text-green-600 font-semibold"
           >
             Completed
           </span>
 
           <span
             v-else
-            class="text-yellow-600 font-semibold text-sm"
+            class="text-yellow-600 font-semibold"
           >
             Pending
           </span>
