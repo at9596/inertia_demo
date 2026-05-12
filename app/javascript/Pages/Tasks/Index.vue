@@ -1,6 +1,5 @@
 <script setup>
-import { ClipboardList, Download } from 'lucide-vue-next'
-import ThemeToggle from '@/Pages/ThemeToggle.vue'
+import {  Download } from 'lucide-vue-next'
 
 defineProps({
   tasks: Array
@@ -36,18 +35,12 @@ const downloadTasks = (tasks)=>{
 <template>
   <div class="min-h-screen dark:bg-gray-900 bg-gray-100 py-10 px-4">
     <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
-    <ThemeToggle />
 
       <!-- Header -->
       <div class="flex items-start justify-between mb-8">
 
         <!-- Left -->
         <div class="flex items-center gap-4">
-          <!-- Icon -->
-          <div class="bg-blue-100 p-4 rounded-2xl">
-            <ClipboardList class="w-10 h-10 text-blue-600" />
-          </div>
-
           <!-- Title -->
           <div>
            
@@ -55,9 +48,6 @@ const downloadTasks = (tasks)=>{
             <h1 class="text-4xl font-bold text-gray-800 dark:text-white">
               My Tasks
             </h1>
-             <p class="text-sm text-gray-500 font-medium dark:text-gray-300">
-              Add form
-            </p>
           </div>
         </div>
 
@@ -97,8 +87,8 @@ const downloadTasks = (tasks)=>{
             ></div>
 
             <span
-              class="text-gray-800 font-medium"
-              :class="{ 'line-through text-gray-400': task.completed }"
+              class="text-gray-800 font-medium dark:text-gray-400"
+              :class="{ 'line-through text-gray-400 dark:text-gray-200': task.completed }"
             >
               {{ task.title }}
             </span>
