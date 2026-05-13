@@ -1,7 +1,16 @@
 <script setup>
+import {computed} from 'vue'
 import ThemeToggle from '@/Components/ThemeToggle.vue'
 import { Link } from '@inertiajs/vue3'
-import { ClipboardList } from 'lucide-vue-next'
+import { ClipboardList, LogOut } from 'lucide-vue-next'
+import { usePage,router } from '@inertiajs/vue3'
+const page = usePage()
+const userlogged = computed(() => {
+  return page.props.auth?.user
+})
+const logout = () => {
+  router.delete('/users/sign_out')
+}
 </script>
 
 <template>
@@ -40,6 +49,21 @@ import { ClipboardList } from 'lucide-vue-next'
 
         <!-- Theme Toggle -->
         <ThemeToggle />
+         <button
+          v-if="userlogged"
+            @click="logout"
+            class="
+              flex items-center gap-2
+              px-4 py-2 rounded-xl
+              bg-red-100 hover:bg-red-200
+              dark:bg-red-900 dark:hover:bg-red-800
+              text-red-600 dark:text-red-300
+              transition
+            "
+          >
+            <LogOut class="w-4 h-4" />
+            Sign out
+          </button>
       </div>
     </header>
 
