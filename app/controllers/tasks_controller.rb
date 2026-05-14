@@ -1,14 +1,14 @@
 class TasksController < ApplicationController
-  before_action :find_task, only: %w(destroy)
+  before_action :find_task, only: %w[destroy]
   def index
     tasks= Task.order(created_at: :desc).as_json
-    render inertia: 'Tasks/Index', props: {
+    render inertia: "Tasks/Index", props: {
       tasks: tasks
     }
   end
 
   def new
-    render inertia: 'Tasks/Create'
+    render inertia: "Tasks/Create"
   end
 
    def create
@@ -17,9 +17,9 @@ class TasksController < ApplicationController
     if task.save
       tasks= Task.order(created_at: :desc).as_json
       redirect_to tasks_path,
-    notice: 'Task created successfully'
+    notice: "Task created successfully"
     else
-      render inertia: 'Tasks/Create',
+      render inertia: "Tasks/Create",
         props: {
           errors: task.errors
         },
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     redirect_to tasks_path,
-    notice: 'Task deleted successfully'
+    notice: "Task deleted successfully"
   end
 
   private

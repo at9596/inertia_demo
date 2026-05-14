@@ -2,7 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   def new
-    render inertia: 'Auth/Register'
+    render inertia: "Auth/Register"
   end
 
   def create
@@ -12,9 +12,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       sign_up(resource_name, resource)
 
       redirect_to tasks_path,
-        notice: 'Account created successfully'
+        notice: "Account created successfully"
     else
-      render inertia: 'Auth/Register',
+      render inertia: "Auth/Register",
         props: {
           errors: resource.errors
         },

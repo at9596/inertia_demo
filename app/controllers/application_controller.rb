@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   stale_when_importmap_changes
 
   private
-  
+
    def share_inertia_data
     inertia_share auth: {
       user: current_user&.as_json(
